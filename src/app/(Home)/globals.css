@@ -1,0 +1,21 @@
+/** @format */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brown: #a57f60;
+  --white: #fbfbfb;
+  --blue: #3c6997;
+  --light-blue: #6c8ead;
+  --greenish-blue: #538083;
+  --dark-blue: #001524;
+  --black: #1a181b;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
