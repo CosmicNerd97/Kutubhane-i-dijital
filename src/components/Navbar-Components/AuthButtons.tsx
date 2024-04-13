@@ -5,7 +5,11 @@ import AuthButton from "./AuthButton";
 
 const AuthButtons = () => (
   <Flex gap="4" style={{ marginLeft: "auto" }}>
-    <AuthButton variant="outline" content="Register" />
+    <AuthButton
+      onKeyDown={(e) => console.log(e.key)}
+      variant="outline"
+      content="Register"
+    />
     <AuthButton content="Login" />
   </Flex>
 );

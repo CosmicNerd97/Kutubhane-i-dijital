@@ -10,8 +10,10 @@ const AuthButton = ({
   highContrast = true,
   onClick,
   content,
+  ...props
 }: ButtonProps) => (
   <Button
+    {...props}
     onClick={onClick}
     style={{ ...style, cursor: "pointer" }}
     size={size}
