@@ -1,6 +1,6 @@
 /** @format */
 "use server";
-const BookSlides = async () => {
+const BookSlides = () => {
   return <h1>asasa</h1>;
 };
 
