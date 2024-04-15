@@ -14,7 +14,6 @@ import {
   Pagination,
   Scrollbar,
 } from "swiper/modules";
-import { Suspense } from "react";
 const Slides = async ({ Clallback }: { Clallback: Function }) => {
   return (
     <Swiper
@@ -33,9 +32,7 @@ const Slides = async ({ Clallback }: { Clallback: Function }) => {
       scrollbar={{ draggable: true }}
       onSwiper={(swiperInstance) => Clallback(swiperInstance)}
     >
-      <Suspense>
-        <BookSlides />
-      </Suspense>
+      <BookSlides />
     </Swiper>
   );
 };

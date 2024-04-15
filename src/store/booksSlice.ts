@@ -15,6 +15,6 @@ export const booksSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {} = booksSlice.actions;
+export const { setBooksOfTheWeek } = booksSlice.actions;
 
 export default booksSlice.reducer;
