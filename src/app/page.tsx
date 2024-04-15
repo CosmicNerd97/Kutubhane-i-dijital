@@ -1,27 +1,13 @@
 /** @format */
 "use client";
-
-import { Box } from "@radix-ui/themes";
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-  Controller,
-} from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, Suspense } from "react";
+import Slides from "@/components/Slides";
+import store from "../store/store";
+import { Provider } from "react-redux";
 
 export default function Home() {
   const swiper = useRef<any>(null);
-
   const keyPressHandler = (e: KeyboardEvent) => {
-    console.log(e.key);
     if (e.key === "ArrowRight" || e.key === "d") {
       if (swiper.current) {
         swiper.current.slideNext();
@@ -39,6 +25,10 @@ export default function Home() {
     return () => window.removeEventListener("keydown", keyPressHandler);
   }, []);
 
+  function SwiperRefCallback(swiperInstance: any) {
+    swiper.current = swiperInstance;
+  }
+
   return (
     <main
       className="flex flex-col justify-center"
@@ -48,54 +38,11 @@ export default function Home() {
         overflowX: "hidden",
       }}
     >
-      <Swiper
-        style={{
-          maxWidth: "1400px",
-          minHeight: "300px",
-          cursor: "grab",
-        }}
-        modules={[
-          Navigation,
-          Pagination,
-          Scrollbar,
-          Autoplay,
-          A11y,
-          Controller,
-        ]}
-        spaceBetween={0}
-        autoplay
-        slidesPerView={3}
-        navigation
-        loop
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        onSwiper={(swiperInstance) => (swiper.current = swiperInstance)}
-      >
-        <SwiperSlide
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            width: "460",
-          }}
-        >
-          Slide 1
-        </SwiperSlide>
-        <SwiperSlide
-          style={{ display: "flex", justifyContent: "center", width: "460" }}
-        >
-          Slide 2
-        </SwiperSlide>
-        <SwiperSlide
-          style={{ display: "flex", justifyContent: "center", width: "460" }}
-        >
-          Slide 3
-        </SwiperSlide>
-        <SwiperSlide
-          style={{ display: "flex", justifyContent: "center", width: "460" }}
-        >
-          Slide 4
-        </SwiperSlide>
-      </Swiper>
+      <Provider store={store}>
+        <Suspense>
+          <Slides Clallback={SwiperRefCallback} />
+        </Suspense>
+      </Provider>
     </main>
   );
 }
