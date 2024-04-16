@@ -17,6 +17,7 @@ import {
   Navigation,
   Pagination,
   Scrollbar,
+  Zoom,
 } from "swiper/modules";
 
 const BookSlides = ({ Callback }: any) => {
@@ -40,7 +41,7 @@ const BookSlides = ({ Callback }: any) => {
         cursor: hold ? "grabbing" : "grab",
         paddingBlock: "40px",
       }}
-      modules={[Navigation, Pagination, Scrollbar, Autoplay, A11y, Controller]}
+      modules={[Navigation, Pagination, Scrollbar, Autoplay, A11y]}
       spaceBetween={0}
       autoplay
       slidesPerView={3}
@@ -49,10 +50,6 @@ const BookSlides = ({ Callback }: any) => {
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
       onSwiper={(swiperInstance) => Callback(swiperInstance)}
-      onSlideChange={(e) => {
-        const activeIndex = e.activeIndex;
-        const activeBookCover = document.getElementById(`slide-${activeIndex}`);
-      }}
       onTouchStart={() => setHold(true)}
       onTouchEnd={() => setHold(false)}
     >
