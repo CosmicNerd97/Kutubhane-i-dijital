@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run lint && npm run format",
+    "build": "next build && npm run lint && npm run format && npm run build-storybook",
     "start": "next start",
     "lint": "next lint",
     "format": "next lint --fix",
@@ -15,6 +15,7 @@
     "@prisma/client": "^5.12.1",
     "@radix-ui/themes": "^3.0.2",
     "@reduxjs/toolkit": "^2.2.3",
+    "book-cover-3d": "^1.1.2",
     "drizzle-kit": "^0.20.14",
     "drizzle-orm": "^0.30.7",
     "next": "14.1.4",
