@@ -1,6 +1,6 @@
 /** @format */
-
 import { NextAuthOptions } from "next-auth";
+import db from "@/lib/db";
 
 const options: NextAuthOptions = {
   providers: [],
@@ -35,7 +35,17 @@ const options: NextAuthOptions = {
       return baseUrl;
     },
 
-    async signIn({ user, account, profile, email, credentials }: any) {
+    async signIn({ user }: any) {
+      const existingUser = await db.user.findUnique({
+        where: {
+          email: user.email,
+        },
+      });
+
+      if (existingUser) {
+        return false;
+      }
+
       return true;
     },
   },
