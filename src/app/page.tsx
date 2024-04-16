@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 import { useRef, useEffect, Suspense } from "react";
-import Slides from "@/components/Slides";
+import BookSlides from "@/components/BookSlides";
 import store from "../store/store";
 import { Provider } from "react-redux";
 
@@ -40,7 +40,7 @@ export default function Home() {
     >
       <Provider store={store}>
         <Suspense>
-          <Slides Clallback={SwiperRefCallback} />
+          <BookSlides Callback={SwiperRefCallback} />
         </Suspense>
       </Provider>
     </main>
