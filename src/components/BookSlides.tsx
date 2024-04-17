@@ -1,5 +1,4 @@
 /** @format */
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -13,11 +12,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {
   A11y,
   Autoplay,
-  Controller,
   Navigation,
   Pagination,
   Scrollbar,
-  Zoom,
+  Mousewheel,
 } from "swiper/modules";
 
 const BookSlides = ({ Callback }: any) => {
@@ -41,10 +39,9 @@ const BookSlides = ({ Callback }: any) => {
         cursor: hold ? "grabbing" : "grab",
         paddingBlock: "40px",
       }}
-      modules={[Navigation, Pagination, Scrollbar, Autoplay, A11y]}
-      spaceBetween={0}
+      modules={[Navigation, Pagination, Scrollbar, Autoplay, A11y, Mousewheel]}
       autoplay
-      slidesPerView={3}
+      slidesPerView={5}
       navigation
       loop={books?.length > 0 ? true : false}
       pagination={{ clickable: true }}
@@ -53,47 +50,63 @@ const BookSlides = ({ Callback }: any) => {
       onTouchStart={() => setHold(true)}
       onTouchEnd={() => setHold(false)}
     >
-      {books === undefined ? (
-        <h5>Loading</h5>
-      ) : (
-        books.map((book: any, index: number) => (
-          <SwiperSlide
-            key={book.cover_edition_key}
-            id={`slide-${index}`}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              paddingBottom: "30px",
-            }}
-            onClick={() =>
-              window.open(
-                `https://openlibrary.org/books/${book.cover_edition_key}/`
-              )
-            }
-          >
-            <BookCover
-              width={200}
-              height={300}
-              rotate={25}
-              transitionDuration={0.3}
-              thickness={
-                book.number_of_pages_median < 1000
-                  ? book.number_of_pages_median / 10
-                  : 2000
-              }
+      {books?.length === 0
+        ? Array.from({ length: 5 }).map((_, i) => (
+            <SwiperSlide
+              key={i}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                paddingBottom: "30px",
+              }}
             >
               <Image
                 priority={true}
                 width={200}
                 height={300}
-                src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`}
+                src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
                 alt="Book Cover"
               />
-            </BookCover>
-          </SwiperSlide>
-        ))
-      )}
+            </SwiperSlide>
+          ))
+        : books.map((book: any, index: number) => (
+            <SwiperSlide
+              key={book.cover_edition_key}
+              id={`slide-${index}`}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                paddingBottom: "30px",
+              }}
+              onClick={() =>
+                window.open(
+                  `https://openlibrary.org/books/${book.cover_edition_key}/`
+                )
+              }
+            >
+              <BookCover
+                width={200}
+                height={300}
+                rotate={25}
+                transitionDuration={0.3}
+                thickness={
+                  book.number_of_pages_median < 1000
+                    ? book.number_of_pages_median / 10
+                    : 2000
+                }
+              >
+                <Image
+                  priority={true}
+                  width={200}
+                  height={300}
+                  src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`}
+                  alt="Book Cover"
+                />
+              </BookCover>
+            </SwiperSlide>
+          ))}
     </Swiper>
   );
 };

@@ -5,7 +5,7 @@
 
 const nextConfig = {
   images: {
-    domains: ["covers.openlibrary.org"],
+    domains: ["covers.openlibrary.org", "media.giphy.com"],
   },
 };
 
