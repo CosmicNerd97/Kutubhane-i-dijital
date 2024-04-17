@@ -1,6 +1,6 @@
 /** @format */
 import { NextAuthOptions } from "next-auth";
-import db from "@/lib/db";
+import db from "@/utilities/db";
 
 const options: NextAuthOptions = {
   providers: [],
